@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{1AB6E1FC-55D3-432D-AB58-A28AA8B518AF}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Hospital/Controllers/WeatherForecastController.cs">
+    <Files>
+      <File FileName="Hospital/Controllers/PatientController.cs" Line="5" Column="19" />
+      <File FileName="Hospital/Dockerfile" Line="1" Column="1" />
+      <File FileName="Hospital/Models/Patient.cs" Line="3" Column="19" />
+      <File FileName="Hospital/Models/Response.cs" Line="13" Column="1" />
+      <File FileName="Hospital/DB/DBContext.cs" Line="10" Column="6" />
+      <File FileName="Hospital/Controllers/WeatherForecastController.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Hospital" expanded="True">
+            <Node name="docker-compose" expanded="True" />
+            <Node name="Hospital" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="WeatherForecastController.cs" selected="True" />
+              </Node>
+              <Node name="DB" expanded="True" />
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Hospital PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
