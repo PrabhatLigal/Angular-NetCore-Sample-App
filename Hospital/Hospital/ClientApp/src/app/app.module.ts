@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -13,8 +13,14 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzFormModule } from 'ng-zorro-antd/form';
+
 import { PatientsComponent } from './pages/patients/patients.component';
+import { AddPatientModalComponent } from './shared/add-patient-modal/add-patient-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -23,21 +29,27 @@ import { PatientsComponent } from './pages/patients/patients.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    PatientsComponent
+    PatientsComponent,
+    AddPatientModalComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgZorroAntdModule,
     BrowserAnimationsModule,
     NzModalModule,
     NzTableModule,
     NzStatisticModule,
+    NzButtonModule,
+    NzIconModule,
+    NzFormModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'patients', component: PatientsComponent },
     ])
   ],
   providers: [ { provide: NZ_I18N, useValue: en_US }],

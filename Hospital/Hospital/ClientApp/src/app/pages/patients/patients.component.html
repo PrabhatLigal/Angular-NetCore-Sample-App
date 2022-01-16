@@ -1,3 +1,29 @@
-<p>
+<!-- <p>
   patients works!
-</p>
+</p> -->
+
+
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="patients">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <!-- <th>Temp. (C)</th>
+      <th>Temp. (F)</th>
+      <th>Summary</th> -->
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let patient of patients">
+      <td>{{ patient.name }}</td>
+      <!-- <td>{{ forecast.temperatureC }}</td>
+      <td>{{ forecast.temperatureF }}</td>
+      <td>{{ forecast.summary }}</td>  -->
+      <td>
+        <button nz-button nzType="link" (click)="onEdit()">Edit</button>
+        <button nz-button nzType="danger" (click)="confirmDelete()">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
