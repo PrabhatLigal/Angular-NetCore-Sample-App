@@ -7,6 +7,6 @@ namespace Hospital.Models
 
         public int StatusCode { get; set; }
 
-        public bool ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

@@ -28,49 +28,59 @@ namespace Hospital.Controllers
             _context = new DBContext(options);
         }
 
+        //GET: api/v1/patient
         [HttpGet]
         public IEnumerable<Patient> GetAll()
         {
             return _context.Patients.ToArray();
         }
 
-        [HttpPost]
-        public Response Create(long id)
+        // GET api/v1/patient/5
+        [HttpGet("{id}")]
+        public Patient Get(int id)
         {
-            var patient = _context.Patients.Single(x => x.Id == id);
-            if (patient == null)
+            return _context.Patients.FirstOrDefault(x => x.Id == id);
+        }
+
+        // POST api/v1/patient
+        [HttpPost("{id}")]
+        public Response Create(long id, [FromBody] Patient patient)
+        {
+            var exist = _context.Patients.Any(x => x.Id == id);
+            if (!exist)
             {
                 _context.Add(patient);
                 _context.SaveChanges();
                 return new Response() { Success = true };
             }
-            return new Response() { Success = false };
+            return new Response() { Success = false , ErrorMessage= "Already Exists"};
         }
 
-        [HttpDelete]
+        // DELETE api/v1/patient/5
+        [HttpDelete("{id}")]
         public Response Delete(long id)
         {
-            var patient = _context.Patients.Single(x => x.Id == id);
+            var patient = _context.Patients.FirstOrDefault(x => x.Id == id);
             if (patient != null)
             {
                 _context.Remove(patient);
                 _context.SaveChanges();
                 return new Response() { Success = true };
             }
-            return new Response() { Success = false };
+            return new Response() { Success = false,ErrorMessage="Record not found" };
         }
 
-        [HttpPut]
-        public Response Update(Patient p)
+        [HttpPut("{id}")]
+        public Response Update(int id, [FromBody] Patient patient)
         {
-            var patient = _context.Patients.Single(x => p.Id == x.Id);
-            if (patient != null)
+            var exists = _context.Patients.Any(x => id == x.Id);
+            if (exists)
             {
                 _context.Update(patient);
                 _context.SaveChanges();
                 return new Response() { Success = true };
             }
-            return new Response() { Success = false };
+            return new Response() { Success = false, ErrorMessage="Doesnot Exisr" };
         }
 
     }

@@ -1,0 +1,49 @@
+﻿### Use Extension REST Client by Mads Kristensen
+@hostname = localhost
+@port = 5001
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+
+
+
+# Create
+POST https://{{host}}/api/v1/patient/10
+Content-Type:{{contentType}}
+
+{
+	"id":10,
+	"name":"Patient X",
+	"sex":"M",
+	"birthDate":"2041-01-17T18:15:29.2321884+11:00",
+	"physician":"Dr Chen",
+	"scheduleTime":null,
+	"admissionTime":null,
+	"dischargeTime":null,
+	"admittedRoom":null,
+	"diagonsis":null
+}
+ ###
+PUT https://{{host}}/api/v1/patient/10
+Content-Type:{{contentType}}
+{
+	"id":10,
+	"name":"Patient X",
+	"sex":"M",
+	"birthDate":"2041-01-17T18:15:29.2321884+11:00",
+	"physician":"Dr Chen",
+	"scheduleTime":null,
+	"admissionTime":null,
+	"dischargeTime":null,
+	"admittedRoom":null,
+	"diagonsis":"Covid Positive"
+}
+
+###
+GET https://{{host}}/api/v1/patient
+
+###
+GET https://{{host}}/api/v1/patient/10
+
+###
+DELETE https://{{host}}/api/v1/patient/10
