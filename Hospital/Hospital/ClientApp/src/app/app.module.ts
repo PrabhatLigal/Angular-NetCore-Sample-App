@@ -15,7 +15,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 
 import { PatientsComponent } from './pages/patients/patients.component';
@@ -30,8 +30,9 @@ import { AddPatientModalComponent } from './shared/add-patient-modal/add-patient
     CounterComponent,
     FetchDataComponent,
     PatientsComponent,
-    AddPatientModalComponent,
+    AddPatientModalComponent
   ],
+  entryComponents: [AddPatientModalComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -52,7 +53,10 @@ import { AddPatientModalComponent } from './shared/add-patient-modal/add-patient
       { path: 'patients', component: PatientsComponent },
     ])
   ],
-  providers: [ { provide: NZ_I18N, useValue: en_US }],
+  providers: [ 
+    { provide: NZ_I18N, useValue: en_US }, 
+    // { provide: NZ_ICONS, useValue: icons }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
