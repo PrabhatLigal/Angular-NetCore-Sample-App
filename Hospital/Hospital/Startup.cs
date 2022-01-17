@@ -55,7 +55,7 @@ namespace Hospital
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "api/v1/{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>

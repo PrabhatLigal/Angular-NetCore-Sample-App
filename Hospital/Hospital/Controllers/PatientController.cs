@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace Hospital.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class PatientController : ControllerBase
     {
         private DBContext _context;
@@ -22,7 +22,7 @@ namespace Hospital.Controllers
             _logger = logger;
             //Remove Later
             var options = new DbContextOptionsBuilder<DBContext>()
-                   .UseInMemoryDatabase(databaseName: "BirthDB")
+                   .UseInMemoryDatabase(databaseName: "Patient")
                    .Options;
 
             _context = new DBContext(options);

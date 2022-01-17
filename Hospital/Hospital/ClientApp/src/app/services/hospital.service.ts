@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Patient } from '../model/patient';
@@ -9,21 +9,23 @@ import { Patient } from '../model/patient';
 })
 export class HospitalService {
 
-  baseUrl = environment.apiURL;
-  constructor(private http: HttpClient) { }
+  baseUrl: string;
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    this.baseUrl = baseUrl;
+  }
 
-  getPatients(params: HttpParams = null): Observable<Patient[]> {
-    const url = `${this.baseUrl}/patient/`;
+  getPatients(): Observable<Patient[]> {
+    const url = `${this.baseUrl}api/v1/patient/`;
 
-    let p:Array<Patient>  = [
-      { name: 'Product 001'},
-      { name: 'Product 002'},
-      { name: 'Product 003'},
-      { name: 'Product 004'},
-      { name: 'Product 005'}
-    ];
-    return of(p);
-    // return this.http.get<Patient>(url, { params });
+    //let p:Array<Patient>  = [
+    //  { name: 'Product 001'},
+    //  { name: 'Product 002'},
+    //  { name: 'Product 003'},
+    //  { name: 'Product 004'},
+    //  { name: 'Product 005'}
+    //];
+    //return of(p);
+    return this.http.get<Patient[]>(url);
   }
 
   addPatient(patient: Patient): Observable<Patient> {
