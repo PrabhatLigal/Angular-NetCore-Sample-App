@@ -18,6 +18,10 @@ namespace Hospital.Controllers
         public PatientController(DBContext context)
         {
             _context = context;
+            // Only for local testing
+#if DEBUG
+            _context.Seed();
+#endif
         }
 
         //GET: api/v1/patient

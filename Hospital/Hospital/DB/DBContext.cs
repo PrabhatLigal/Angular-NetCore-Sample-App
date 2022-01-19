@@ -13,7 +13,7 @@ namespace Hospital.DB
 
         public DBContext(DbContextOptions<DBContext> options): base(options){}
 
-        async void Seed()
+        public async void Seed()
         {
             if (await Patients.CountAsync() < 1)
             {

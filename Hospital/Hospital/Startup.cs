@@ -30,8 +30,12 @@ namespace Hospital
             });
 
 
-            services.AddDbContext<DBContext>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            // For Testing and running locally
+            services.AddDbContext<DBContext>(options => options.UseInMemoryDatabase("HospitalDB"));
+
+            // Postgres Setup required
+            //services.AddDbContext<DBContext>(options =>
+            //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
            
          }
 
@@ -77,6 +81,8 @@ namespace Hospital
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+
         }
     }
 }
