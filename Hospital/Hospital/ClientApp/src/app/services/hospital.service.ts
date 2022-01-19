@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Patient } from '../model/patient';
+import { Response } from '../model/response';
 
 @Injectable({
   providedIn: 'root'
@@ -18,29 +19,34 @@ export class HospitalService {
     const url = `${this.baseUrl}api/v1/patient/`;
 
     //let p:Array<Patient>  = [
-    //  { name: 'Product 001'},
-    //  { name: 'Product 002'},
-    //  { name: 'Product 003'},
-    //  { name: 'Product 004'},
-    //  { name: 'Product 005'}
+    //  { name: 'Product 001', id: 1, sex: 'Male',physician:'Dr Chen',age: 20,diagnosis:'N'},
+    //  { name: 'Product 002', id: 1, sex: 'Male',physician:'Dr Chen',age: 20,diagnosis:'N'},
+    //  { name: 'Product 003', id: 1, sex: 'Female',physician:'Dr Chen',age: 20,diagnosis:'N'},
+    //  { name: 'Product 004', id: 1, sex: 'Male',physician:'Dr Chen',age: 20,diagnosis:'N'},
+    //  { name: 'Product 005', id: 1, sex: 'Male',physician:'Dr Chen',age: 20,diagnosis:'N'}
     //];
     //return of(p);
     return this.http.get<Patient[]>(url);
   }
 
-  addPatient(patient: Patient): Observable<Patient> {
-    const url = `${this.baseUrl}/patient/`;
-    return this.http.post<Patient>(url, patient );
+  getPatient(id: number): Observable<Patient> {
+    const url = `${this.baseUrl}api/v1/patient/${id}`;
+    return this.http.get<Patient>(url);
   }
 
-  editPatient(patient: Patient): Observable<Patient> {
-    const url = `${this.baseUrl}/patient/`;
-    return this.http.put<Patient>(url, patient );
+  addPatient(patient: Patient): Observable<Response> {
+    const url = `${this.baseUrl}api/v1/patient/`;
+    return this.http.post<Response>(url, patient);
   }
 
-  deletePatient(patient: Patient): Observable<Patient> {
-    const url = `${this.baseUrl}/patient/`;
-    return this.http.delete<Patient>(url );
+  editPatient(id: number,patient: any): Observable<Response> {
+    const url = `${this.baseUrl}api/v1/patient/${id}`;
+    return this.http.put<Response>(url, patient);
+  }
+
+  deletePatient(id: number): Observable<Response> {
+    const url = `${this.baseUrl}api/v1/patient/${id}`;
+    return this.http.delete<Response>(url);
   }
 
 

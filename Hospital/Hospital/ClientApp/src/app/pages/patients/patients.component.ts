@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd';
+import { NzModalRef, NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { Patient } from 'src/app/model/patient';
 import { HospitalService } from 'src/app/services/hospital.service';
 import { AddPatientModalComponent } from 'src/app/shared/add-patient-modal/add-patient-modal.component';
@@ -13,15 +13,29 @@ export class PatientsComponent implements OnInit {
 
   patients: Patient[];
   confirmModal: NzModalRef; // For testing by now
-  constructor( private hospitalService: HospitalService, private modal: NzModalService,  private viewContainerRef: ViewContainerRef) { }
+  constructor(
+    private hospitalService: HospitalService,
+    private modal: NzModalService,
+    private notification: NzNotificationService,
+    private viewContainerRef: ViewContainerRef) { }
 
 
-  confirmDelete(): void {
+  confirmDelete(arg: Patient): void {
     this.confirmModal = this.modal.confirm({
       nzTitle: 'Do you Want to delete this record?',
       nzContent: 'This action cannot be undone.',
-      nzOnOk: () =>{
-
+      nzOnOk: () => {
+        this.hospitalService.deletePatient(arg.id).subscribe(res => {
+          if (res.success) {
+            this.loadData();
+            this.notification.success('Successful', 'The record is deleted.');
+          } else {
+            this.notification.error('Error', res.errorMessage);
+          }
+        }, error => {
+          this.notification.error('Error', "Server Error");
+          //console.log(error);
+        });
       }
     });
   }
@@ -31,20 +45,27 @@ export class PatientsComponent implements OnInit {
       nzTitle: arg ? "Edit" : "Create",
       nzWidth: '768px',
       nzContent: AddPatientModalComponent,
+      nzFooter: null,
       nzComponentParams: {
         selected: arg,
       },
       nzOnOk: () => new Promise((resolve) => setTimeout(resolve, 1000)),
     });
 
-    modal.afterClose.subscribe((result) => {});
+    modal.afterClose.subscribe((result) => {
+      this.loadData();
+    });
 
   }
 
   ngOnInit() {
+    this.loadData();
+  }
+
+
+  loadData(): void {
     this.hospitalService.getPatients().subscribe((res) => {
       this.patients = res;
     });
   }
-
 }

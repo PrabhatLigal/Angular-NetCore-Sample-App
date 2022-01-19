@@ -15,17 +15,9 @@ namespace Hospital.Controllers
     public class PatientController : ControllerBase
     {
         private DBContext _context;
-        private readonly ILogger<PatientController> _logger;
-
-        public PatientController(ILogger<PatientController> logger)
+        public PatientController(DBContext context)
         {
-            _logger = logger;
-            //Remove Later
-            var options = new DbContextOptionsBuilder<DBContext>()
-                   .UseInMemoryDatabase(databaseName: "Patient")
-                   .Options;
-
-            _context = new DBContext(options);
+            _context = context;
         }
 
         //GET: api/v1/patient
@@ -43,17 +35,19 @@ namespace Hospital.Controllers
         }
 
         // POST api/v1/patient
-        [HttpPost("{id}")]
-        public Response Create(long id, [FromBody] Patient patient)
+        [HttpPost]
+        public Response Create([FromBody] Patient patient)
         {
-            var exist = _context.Patients.Any(x => x.Id == id);
-            if (!exist)
+            try
             {
                 _context.Add(patient);
                 _context.SaveChanges();
                 return new Response() { Success = true };
+
+            }catch(Exception ex)
+            {
+                return new Response() { Success = false , ErrorMessage= "Already Exists"};
             }
-            return new Response() { Success = false , ErrorMessage= "Already Exists"};
         }
 
         // DELETE api/v1/patient/5

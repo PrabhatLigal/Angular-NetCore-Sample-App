@@ -17,6 +17,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { PatientsComponent } from './pages/patients/patients.component';
 import { AddPatientModalComponent } from './shared/add-patient-modal/add-patient-modal.component';
@@ -46,11 +47,12 @@ import { AddPatientModalComponent } from './shared/add-patient-modal/add-patient
     NzButtonModule,
     NzIconModule,
     NzFormModule,
+    NzNotificationModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'patients', component: PatientsComponent },
+      { path: '', component: PatientsComponent, pathMatch: 'full' },
+      //{ path: 'counter', component: CounterComponent },
+      //{ path: 'fetch-data', component: FetchDataComponent },
+      { path: 'about', component: HomeComponent },
     ])
   ],
   providers: [ 
