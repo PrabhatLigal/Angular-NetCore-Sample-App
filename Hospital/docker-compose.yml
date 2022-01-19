@@ -1,4 +1,9 @@
 version: '3.4'
+#TODO
+
+networks:
+  dockerapi-dev:
+    driver: bridge 
 
 services:
   hospital:
@@ -6,3 +11,34 @@ services:
     build:
       context: .
       dockerfile: Hospital/Dockerfile
+    depends_on:
+      - "postgres_image"
+    ports:
+      - "80:80"     
+    networks:
+      - dockerapi-dev
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "Hospital"
+    networks:
+      - dockerapi-dev
+
+volumes:
+  db_volume:   

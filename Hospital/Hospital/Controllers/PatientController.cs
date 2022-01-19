@@ -20,7 +20,7 @@ namespace Hospital.Controllers
             _context = context;
             // Only for local testing
 #if DEBUG
-            _context.Seed();
+             _context.Seed();
 #endif
         }
 

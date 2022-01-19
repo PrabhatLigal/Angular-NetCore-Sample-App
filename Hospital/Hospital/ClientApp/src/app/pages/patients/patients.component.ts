@@ -22,7 +22,7 @@ export class PatientsComponent implements OnInit {
 
   confirmDelete(arg: Patient): void {
     this.confirmModal = this.modal.confirm({
-      nzTitle: 'Do you Want to delete this record?',
+      nzTitle: 'Do you want to delete this record?',
       nzContent: 'This action cannot be undone.',
       nzOnOk: () => {
         this.hospitalService.deletePatient(arg.id).subscribe(res => {

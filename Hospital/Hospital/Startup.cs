@@ -29,15 +29,15 @@ namespace Hospital
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            //Delete one or uncomment one of the options
 
             // For Testing and running locally
-            services.AddDbContext<DBContext>(options => options.UseInMemoryDatabase("HospitalDB"));
+            //services.AddDbContext<DBContext>(options => options.UseInMemoryDatabase("HospitalDB"));
 
-            // Postgres Setup required
-            //services.AddDbContext<DBContext>(options =>
-            //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-           
-         }
+            // Postgres Setup required: 
+            services.AddDbContext<DBContext>(options =>
+            options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
